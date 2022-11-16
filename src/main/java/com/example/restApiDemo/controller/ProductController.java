@@ -1,6 +1,6 @@
 package com.example.restApiDemo.controller;
 
-import com.example.restApiDemo.entity.Product;
+import com.example.restApiDemo.model.Product;
 import com.example.restApiDemo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
