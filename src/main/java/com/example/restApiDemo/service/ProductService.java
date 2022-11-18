@@ -41,20 +41,35 @@ public class ProductService {
 
     }
 
-    public List<Product> getProducts() {
+    public List<Product> getProducts(String query) {
+        List<ProductEntity> productEntityList;
+        List<Product> productsList = new ArrayList<Product>();
+        Product p = new Product();
+        if(query == null) {
+            productEntityList = repository.findAll();
+            for (ProductEntity e : productEntityList) {
 
-        List<ProductEntity> productEntities = repository.findAll();
-        List<Product> products = new ArrayList<Product>();
-        for(ProductEntity e : productEntities)
-        {
-            Product p = new Product();
-            p.setId(e.getId());
-            p.setName(e.getName());
-            p.setQuantity(e.getQuantity());
-            p.setPrice(e.getPrice());
-            products.add(p);
+                p.setId(e.getId());
+                p.setName(e.getName());
+                p.setQuantity(e.getQuantity());
+                p.setPrice(e.getPrice());
+                productsList.add(p);
+            }
+//        System.out.println(productEntities.stream().filter(i -> i. ));
         }
-        return products;
+    else {
+            productEntityList = repository.searchProducts(query);
+            for (ProductEntity e : productEntityList) {
+
+                p.setId(e.getId());
+                p.setName(e.getName());
+                p.setQuantity(e.getQuantity());
+                p.setPrice(e.getPrice());
+                productsList.add(p);
+            }
+//        System.out.println(productEntities.stream().filter(i -> i. ));
+        }
+        return productsList;
     }
 
     public Product getProductById(int id) {
@@ -92,6 +107,7 @@ public class ProductService {
         repository.save(entity);
         return product;
     }
+
 
 
 }

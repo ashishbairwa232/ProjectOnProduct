@@ -3,8 +3,10 @@ package com.example.restApiDemo.controller;
 import com.example.restApiDemo.model.Product;
 import com.example.restApiDemo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,8 @@ public class ProductController {
         return service.saveProducts(products);
     }
     @GetMapping("/products")
-    public List<Product> findAllProducts() {
-        return service.getProducts();
+    public ResponseEntity<List<Product>> findAllProducts(@PathParam("query") String query) {
+        return ResponseEntity.ok(service.getProducts(query));
     }
     @GetMapping("/productById/{id}")
     public Product findProductById(@PathVariable int id)
