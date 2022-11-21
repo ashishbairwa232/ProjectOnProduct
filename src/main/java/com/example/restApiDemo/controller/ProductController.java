@@ -1,5 +1,6 @@
 package com.example.restApiDemo.controller;
 
+import com.example.restApiDemo.entity.ProductEntity;
 import com.example.restApiDemo.model.Product;
 import com.example.restApiDemo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,13 @@ public class ProductController {
     public String deleteProduct(@PathVariable int id)
     {
         return service.deleteProduct(id);
+    }
+    @PatchMapping("/partialUpdate/{id}")
+    public Product patchResource(
+            @PathVariable int id,
+            @RequestBody Product product) {
+        return service.partialProductUpdate(id , product);
+
     }
 
 
