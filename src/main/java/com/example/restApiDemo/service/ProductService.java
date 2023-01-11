@@ -4,6 +4,8 @@ import com.example.restApiDemo.entity.ProductEntity;
 import com.example.restApiDemo.mapper.EntityModelMapper;
 import com.example.restApiDemo.model.Product;
 import com.example.restApiDemo.repository.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -11,14 +13,19 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Service
 public class ProductService {
+    Logger logger = LoggerFactory.getLogger(ProductService.class);
     @Autowired
     private ProductRepository repository;
     @Autowired
     private EntityModelMapper entityModelMapper;
 
     public Product saveProduct(Product product) {
+        logger.info("save product on database");
+
         ProductEntity entity =  entityModelMapper.modelToEntity(product);
 //        entity.setName(product.getName());
 //        entity.setQuantity(product.getQuantity());
